@@ -1,6 +1,4 @@
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
 
 public class PhotoMap {
     private Map<Integer, Slide> photos;
@@ -31,32 +29,28 @@ public class PhotoMap {
         return min;
     }
 
-    private boolean noInicio(Slide first, Slide last, Slide newPhoto) {
-        return min(first, newPhoto) > min(last, newPhoto);
-    }
-
-    public void createSlideshow(){
+    void createSlideshow(){
         System.out.println(photos.size());
-        LinkedList<String> a = new LinkedList<>();
-        Slide first = null;
-        Slide last = null;
+        List<Slide> a = new ArrayList<>();
 
         for(Slide v : photos.values()) {
-            if(first == null) {
-                first = last = v;
-                a.add(v.getSlidePhotos());
-            } else {
-                if(noInicio(first, last, v)) {
-                    first = v;
-                    a.addFirst(v.getSlidePhotos());
-                } else {
-                    last = v;
-                    a.addLast(v.getSlidePhotos());
+            boolean done = false;
+            if(a.isEmpty()) a.add(v);
+            else {
+                for (int i = 0; i < a.size(); i++) {
+                    Slide x = a.get(i);
+                    if (min(x, v) > 0) {
+                        a.add(i, v);
+                        done = true;
+                        break;
+                    }
                 }
+                if(!done)
+                    a.add(v);
             }
         }
 
-        a.forEach(System.out::println);
+        a.forEach(x -> System.out.println(x.getSlidePhotos()));
     }
 
     void paraString(){

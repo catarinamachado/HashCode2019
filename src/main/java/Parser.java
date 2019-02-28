@@ -10,7 +10,6 @@ public class Parser{
     
 
     public static void main(String[] args) {
-    
         String filename = "b_lovely_landscapes.txt";
 
         int i=0;
@@ -20,10 +19,10 @@ public class Parser{
         int nTags = -1;
         ArrayList<String> tags = new ArrayList<>();
 
-        Photo p;
+        Slide p;
         PhotoMap pM= new PhotoMap();
 
-    
+
         try (Stream<String> stream = Files.lines(Paths.get(filename))) {
 
             stream.forEach(s -> list.add(s));
@@ -37,7 +36,6 @@ public class Parser{
                 if(i==0){
                     nPhotos = Integer.valueOf(s);
                     i++;
-                    System.out.println("Numero de fotos: " + nPhotos);
                 }
                 else{
                     
@@ -51,18 +49,19 @@ public class Parser{
 
 
 
-                    p = new Photo(tags, position);
+                    p = new Slide(tags, position);
                     pM.add(p);
 
                     tags = new ArrayList<>();
                 }
 
-                
-            }    
-            
-            
-        pM.paraString();
+
+            }
+
+
+            pM.createSlideshow();
         }
-    
+
+
 }
 
