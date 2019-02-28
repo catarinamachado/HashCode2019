@@ -1,13 +1,32 @@
-import jdk.internal.net.http.common.Pair;
-
+import javafx.util.Pair;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhotoRelationships {
-    private List<Pair<Integer,Integer>> photos;
+class PhotoRelationships {
+    private Photo photo;
+    private List<Pair<Photo,Integer>> photos;
 
-    public PhotoRelationships(){
-        this.photos = new ArrayList<Pair<Integer, Integer>>();
+    PhotoRelationships(Photo photo){
+        this.photo = photo;
+        this.photos = new ArrayList<>();
     }
 
+    void addToList(Photo newPhoto) {
+        int min, e, comuns = 0, d;
+
+        for(String tag : photo.getTags()) {
+            if(newPhoto.getTags().contains(tag))
+                comuns++;
+        }
+
+        e = photo.getTags().size() - comuns;
+        d = newPhoto.getTags().size() - comuns;
+
+        min = e;
+        if (comuns < min) min = comuns;
+        if(d < min) min = d;
+
+        Pair<Photo, Integer> a = new Pair<>(newPhoto, min);
+        photos.add(a);
+    }
 }

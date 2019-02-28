@@ -10,10 +10,9 @@ public class PhotoMap {
     }
 
     public void add(Photo photo){
-        photoRelationshipsMap.forEach((k,v) -> {
-            Photo photo1 = photos.get(k);
-            v.add(photo);
-        });
+        photoRelationshipsMap.forEach((k,v) ->
+            v.addToList(photo)
+        );
 
         PhotoRelationships list = new PhotoRelationships(photo);
         this.photos.put(photo.getId(), photo);
