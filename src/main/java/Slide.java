@@ -1,36 +1,41 @@
 import java.util.List;
 
-class Slide {
-    private int id;
+public class Slide {
+    private String ids;
+    private int id1;
+    private int id2;
     private List<String> tags;
-    private String slidePhotos;
-    private static int nextId = 0;
-    private boolean isHorizontal;
+    private Photo photo1;
+    private Photo photo2;
+    private int nrPhotos;
 
-    int getId() {
-        return id;
+    public int getId() {
+        return id1;
     }
 
-    List<String> getTags() {
+    public String getIds() {
+        return ids;
+    }
+
+    public List<String> getTags() {
         return tags;
     }
 
-    boolean isHorizontal() {
-        return isHorizontal;
+    //quando é foto horizontal
+    public Slide(Photo photo1) {
+        this.id1 = photo1.getId();
+        this.ids = String.valueOf(id1);
+        this.tags = photo1.getTags();
+        this.nrPhotos = 1;
     }
 
-    Slide(List<String> tags, boolean isHorizontal) {
-        this.id = nextId++;
-        this.tags = tags;
-        this.isHorizontal = isHorizontal;
-        this.slidePhotos = Integer.toString(id);
-    }
-
-     String getSlidePhotos() {
-        return slidePhotos;
-    }
-
-    public void setSlidePhotos(String slidePhotos) {
-        this.slidePhotos = slidePhotos;
+    //quando a fotos verticais
+    public Slide(Photo photo1, Photo photo2) {
+        this.id1 = photo1.getId();
+        this.id2 = photo2.getId();
+        this.ids = id1 + " " + id2;
+        this.tags = photo1.getTags();
+        this.tags.addAll(photo2.getTags());
+        this.nrPhotos = 2;
     }
 }

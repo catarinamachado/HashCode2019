@@ -6,9 +6,6 @@ import java.util.stream.Stream;
 
 
 public class Parser{
-
-    
-
     public static void main(String[] args) {
         String filename = "b_lovely_landscapes.txt";
 
@@ -19,8 +16,10 @@ public class Parser{
         int nTags = -1;
         ArrayList<String> tags = new ArrayList<>();
 
-        Slide p;
+        Photo p;
+        Slide slide;
         PhotoMap pM= new PhotoMap();
+        SlideMap sM= new SlideMap();
 
 
         try (Stream<String> stream = Files.lines(Paths.get(filename))) {
@@ -47,19 +46,29 @@ public class Parser{
                         tags.add(splited[j]);
                     }
 
+                    p = new Photo(tags, position);
 
+                    Photo array[] = new Photo[2];
+                    int nr = 0;
 
-                    p = new Slide(tags, position);
-                    pM.add(p);
+                    if(position) {
+                        slide = new Slide(p);
+                        sM.add(slide);
+                    } else if(nr == 0) {
+                        array[nr] = p;
+                        nr = 1;
+                    } else {
+                        slide = new Slide(array[0], array[1]);
+                        array[nr] = p;
+                        nr = 0;
+                        sM.add(slide);
+                    }
 
                     tags = new ArrayList<>();
                 }
-
-
             }
-
-
-            pM.createSlideshow();
+            
+            pM.paraString();
         }
 
 

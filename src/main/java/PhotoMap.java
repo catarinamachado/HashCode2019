@@ -27,6 +27,19 @@ public class PhotoMap {
         if (comuns < min) min = comuns;
         if(d < min) min = d;
 
+    public Photo getPhoto(int id) {
+        return photos.get(id);
+    }
+
+    public Map<Integer, Photo> getPhotos() {
+        return this.photos;
+    }
+
+    public void add(Photo photo){
+        photoRelationshipsMap.forEach((k,v) ->
+            v.addToList(photo)
+        );
+
         return min;
     }
 
@@ -62,7 +75,7 @@ public class PhotoMap {
         }
     }
 
-    void paraString(){
+    public void paraString(){
         int i = 0;
         for(Slide p: this.photos.values()){
             System.out.println("Foto nr: " + p.getId());
@@ -71,6 +84,7 @@ public class PhotoMap {
                 i++;
             }
             System.out.println("É horizontal: " + p.isHorizontal());
+            i = 0;
         }
 
     }
