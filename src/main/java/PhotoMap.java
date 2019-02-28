@@ -24,10 +24,14 @@ public class PhotoMap {
     }
 
     public void paraString(){
+        int i = 0;
         for(Photo p: this.photos.values()){
-            System.out.println("Foto nr" + p.getId());
-            System.out.println("Tags" + p.getTags());
-            System.out.println("É horizontal" + p.isHorizontal());
+            System.out.println("Foto nr: " + p.getId());
+            for(String s: p.getTags()){
+                System.out.println("Tag " + i + ": " + s);
+                i++;
+            }
+            System.out.println("É horizontal: " + p.isHorizontal());
         }
 
     }
