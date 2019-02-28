@@ -6,12 +6,17 @@ public class PhotoMap {
     private Map<Integer, Photo> photos;
 
     public PhotoMap(){
-        this.photoRelationshipsMap = new HashMap<Integer, PhotoRelationships>();
+        this.photoRelationshipsMap = new HashMap<>();
     }
 
     public void add(Photo photo){
-        PhotoRelationships list = new PhotoRelationships();
-        //todo algoritmo
+        photoRelationshipsMap.forEach((k,v) -> {
+            Photo photo1 = photos.get(k);
+            v.add(photo);
+        });
+
+        PhotoRelationships list = new PhotoRelationships(photo);
+        this.photos.put(photo.getId(), photo);
         this.photoRelationshipsMap.put(photo.getId(),list);
     }
 
