@@ -7,6 +7,7 @@ public class PhotoMap {
 
     public PhotoMap(){
         this.photoRelationshipsMap = new HashMap<>();
+        this.photos = new HashMap<>();
     }
 
     public void add(Photo photo){
@@ -16,7 +17,7 @@ public class PhotoMap {
 
         PhotoRelationships list = new PhotoRelationships(photo);
         this.photos.put(photo.getId(), photo);
-        this.photoRelationshipsMap.put(photo.getId(),list);
+        //this.photoRelationshipsMap.put(photo.getId(),list);
     }
 
     public void createSlideshow(){

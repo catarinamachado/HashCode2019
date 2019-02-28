@@ -22,5 +22,6 @@ public class Photo {
         this.id = nextId++;
         this.tags = tags;
         this.isHorizontal = isHorizontal;
+        System.out.println("Created Photo: " + this.id);
     }
 }
