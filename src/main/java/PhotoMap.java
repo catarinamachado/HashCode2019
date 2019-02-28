@@ -22,4 +22,13 @@ public class PhotoMap {
     public void createSlideshow(){
         //todo implement
     }
+
+    public void paraString(){
+        for(Photo p: this.photos.values()){
+            System.out.println("Foto nr" + p.getId());
+            System.out.println("Tags" + p.getTags());
+            System.out.println("É horizontal" + p.isHorizontal());
+        }
+
+    }
 }
