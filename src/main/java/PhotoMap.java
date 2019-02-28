@@ -1,3 +1,4 @@
+import java.io.PrintWriter;
 import java.util.*;
 
 public class PhotoMap {
@@ -30,10 +31,14 @@ public class PhotoMap {
     }
 
     void createSlideshow(){
-        System.out.println(photos.size());
+        try {
+        PrintWriter writer = new PrintWriter("the-file-name.txt", "UTF-8");
+        writer.println(photos.size());
+
         List<Slide> a = new ArrayList<>();
 
         for(Slide v : photos.values()) {
+            System.out.println(v.getSlidePhotos());
             boolean done = false;
             if(a.isEmpty()) a.add(v);
             else {
@@ -50,7 +55,11 @@ public class PhotoMap {
             }
         }
 
-        a.forEach(x -> System.out.println(x.getSlidePhotos()));
+        a.forEach(x -> writer.println((x.getSlidePhotos())));
+        writer.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     void paraString(){
